@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_const_constructors
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class login_page extends StatelessWidget {
@@ -6,12 +9,48 @@ class login_page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-        child: Center(
-            child: Text("hello",
-                style: TextStyle(
-                  fontSize: 40,
-                  color: Colors.blue,
-                  fontWeight: FontWeight.bold,
-                ))));
+        color: Colors.lightBlueAccent,
+        child: Column(children: [
+          Image.asset("assets/images/love.png", fit: BoxFit.cover),
+          SizedBox(
+            height: 50,
+          ),
+          Text("Welcome bro",
+              style: TextStyle(
+                fontSize: 50,
+                fontWeight: FontWeight.bold,
+                color: Colors.deepPurple,
+              )),
+          SizedBox(
+            height: 50,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+            child: Column(children: [
+              TextFormField(
+                  obscureText: false,
+                  decoration: InputDecoration(
+                      hintText: "You", labelText: "Enter your name")),
+              SizedBox(
+                height: 30,
+              ),
+              TextFormField(
+                  obscureText: false,
+                  decoration: InputDecoration(
+                      hintText: "YOUR's", labelText: "Enter Your crush name")),
+              SizedBox(
+                height: 50,
+              ),
+              ElevatedButton(
+                // ignore: sort_child_properties_last
+                child: Text("Calculate how much she likes you"),
+                style: TextButton.styleFrom(),
+                onPressed: () {
+                  print("SOrry brother she has a boyfriend");
+                },
+              )
+            ]),
+          )
+        ]));
   }
 }
