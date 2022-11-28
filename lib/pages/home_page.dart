@@ -19,17 +19,21 @@ class _homepageState extends State<homepage> {
     return Scaffold(
       appBar: AppBar(title: Text("Surprise App")),
       body: Center(
-        child: InkWell(
-          onTap: () async {
-            setState(() {
-              change = true;
-            });
-            await Future.delayed(Duration(seconds: 1));
-            Navigator.pushNamed(context, myRoutes.loginRoute);
-          },
-          child: AnimatedContainer(
+        child: Material(
+          color: change ? Colors.green : Colors.red,
+          borderRadius: BorderRadius.circular(40),
+          child: InkWell(
+            splashColor: Colors.yellow,
+            onTap: () async {
+              setState(() {
+                change = true;
+              });
+              await Future.delayed(Duration(seconds: 2));
+              Navigator.pushNamed(context, myRoutes.loginRoute);
+            },
+            child: AnimatedContainer(
               duration: Duration(seconds: 1),
-              height: 40,
+              height: 70,
               width: change ? 100 : 200,
               alignment: Alignment.center,
               child: change
@@ -40,9 +44,8 @@ class _homepageState extends State<homepage> {
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       )),
-              decoration: BoxDecoration(
-                  color: change ? Colors.yellow : Colors.green,
-                  borderRadius: BorderRadius.circular(40))),
+            ),
+          ),
         ),
       ),
       drawer: Drawer(),
