@@ -4,6 +4,8 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:myfirst_project/utils/routes.dart';
 
+import '../widget/drawer.dart';
+
 class homepage extends StatefulWidget {
   const homepage({super.key});
 
@@ -48,7 +50,7 @@ class _homepageState extends State<homepage> {
           ),
         ),
       ),
-      drawer: Drawer(),
+      drawer: myDrawer(),
     );
   }
 }
