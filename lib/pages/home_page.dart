@@ -1,15 +1,22 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: prefer_const_constructors
-import 'dart:ffi';
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:myfirst_project/utils/routes.dart';
+import 'package:flutter/services.dart';
+import 'package:velocity_x/velocity_x.dart';
+
 import 'package:myfirst_project/models/catalog.dart';
+import 'package:myfirst_project/utils/routes.dart';
 
 import '../widget/Item_wideget.dart';
 import '../widget/drawer.dart';
-import 'package:flutter/services.dart';
+import '../widget/themes.dart';
+import 'home_widgets/catalogHeader.dart';
+import 'home_widgets/catalogList.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -41,52 +48,21 @@ class _homepageState extends State<homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Catalog App")),
-      body: Padding(
-        padding: const EdgeInsets.all(0.0),
-        child: (catalogModel.items != null && catalogModel.items!.isNotEmpty)
-            ? Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 15,
-                        crossAxisSpacing: 12),
-                    itemCount: catalogModel.items!.length,
-                    itemBuilder: (context, index) {
-                      final item = catalogModel.items![index];
-                      return Card(
-                          clipBehavior: Clip.antiAlias,
-                          shadowColor: Color.fromARGB(255, 101, 101, 185),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: GridTile(
-                              header: Container(
-                                child: Text(item.name,
-                                    style: TextStyle(color: Colors.white)),
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 19, 79, 122),
-                                ),
-                              ),
-                              child: Image.network(item.image),
-                              footer: Container(
-                                child: Text(item.price.toString(),
-                                    style: TextStyle(color: Colors.white)),
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                ),
-                              ),
-                            ),
-                          ));
-                    }),
-              )
-            : Center(
-                child: CircularProgressIndicator(
-                  color: Color.fromARGB(255, 23, 42, 161),
-                ),
-              ),
+      backgroundColor: mythemes.creamColor,
+      body: SafeArea(
+        child: Container(
+          padding: Vx.m32,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              catalogHeader(),
+              if (catalogModel.items != null && catalogModel.items!.isNotEmpty)
+                catalogList().py16().expand()
+              else
+                CircularProgressIndicator().centered().py16().expand(),
+            ],
+          ),
+        ),
       ),
       drawer: myDrawer(),
     );

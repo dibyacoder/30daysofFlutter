@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../widget/themes.dart';
 
 class myDrawer extends StatelessWidget {
   const myDrawer({super.key});
@@ -15,7 +16,7 @@ class myDrawer extends StatelessWidget {
             padding: EdgeInsets.zero,
             child: UserAccountsDrawerHeader(
               margin: EdgeInsets.zero,
-              decoration: BoxDecoration(color: Color.fromARGB(255, 5, 35, 87)),
+              decoration: BoxDecoration(color: Color(0xff403b58)),
               accountName: Text("Dibya Ranjan Sahu"),
               accountEmail: Text("dibyaranja1029@gmail.com"),
               currentAccountPicture: CircleAvatar(
