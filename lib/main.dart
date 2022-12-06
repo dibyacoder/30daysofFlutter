@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:myfirst_project/pages/cart_page.dart';
 import 'package:myfirst_project/pages/home_page.dart';
 import 'package:myfirst_project/pages/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,14 +17,15 @@ class myApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.system,
       theme: mythemes.lighterTheme(context),
       darkTheme: mythemes.DarkTheme(context),
       debugShowCheckedModeBanner: false,
       routes: {
-        "/": (context) => homepage(),
+        "/": (context) => login_page(),
         myRoutes.loginRoute: (context) => login_page(),
         myRoutes.homeRoute: (context) => homepage(),
+        myRoutes.cartPageRoute: (context) => mycart(),
       },
     );
   }

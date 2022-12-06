@@ -50,7 +50,7 @@ class _login_pageState extends State<login_page> {
                   TextFormField(
                     obscureText: false,
                     decoration: InputDecoration(
-                        hintText: "You", labelText: "Enter your name"),
+                        hintText: "Pintu", labelText: "Enter your name"),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "name can't be empty";
@@ -66,9 +66,10 @@ class _login_pageState extends State<login_page> {
                     height: 30,
                   ),
                   TextFormField(
-                    obscureText: false,
+                    obscureText: true,
                     decoration: InputDecoration(
-                        hintText: "YOUR's", labelText: "Enter Your crush name"),
+                        hintText: "Pintu@123",
+                        labelText: "Enter Your Password"),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "crush name can't be empty";
@@ -83,12 +84,12 @@ class _login_pageState extends State<login_page> {
                   ),
                   ElevatedButton(
                     // ignore: sort_child_properties_last
-                    child: Text(
-                        "Calculate"), //Icon(Icons.camera, color: Colors.white),
+                    child: Icon(Icons.signal_cellular_0_bar_outlined,
+                        color: Colors.white),
 
                     style: ElevatedButton.styleFrom(
                       shape: CircleBorder(),
-                      padding: EdgeInsets.all(40),
+                      padding: EdgeInsets.all(30),
                       backgroundColor: Colors.black, // <-- Button color
                       foregroundColor: Colors.grey, // <-- Splash color
                     ),

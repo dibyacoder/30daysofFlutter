@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../models/catalog.dart';
@@ -12,21 +13,35 @@ class homeDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: mythemes.creamColor,
+      backgroundColor: context.canvasColor,
       appBar: AppBar(
-        title: Text("Description"),
-      ),
+          title: "Description"
+              .text
+              .xl3
+              .bold
+              .color(context.theme.buttonColor)
+              .make(),
+          backgroundColor: Colors.transparent),
       bottomNavigationBar: ButtonBar(
         buttonPadding: Vx.mOnly(right: 12),
         alignment: MainAxisAlignment.spaceBetween,
         children: [
-          "\$${catalog.price}".text.bold.xl4.red900.make(),
+          "\$${catalog.price}"
+              .text
+              .color(context.theme.dividerColor)
+              .bold
+              .xl4
+              .make(),
           ElevatedButton(
                   onPressed: () {},
-                  child: "Buy Now".text.italic.make(),
+                  child: "Add to Cart"
+                      .text
+                      .bold
+                      .color(context.theme.cardColor)
+                      .make(),
                   style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(mythemes.darkbluish),
+                          MaterialStateProperty.all(context.theme.buttonColor),
                       shape: MaterialStateProperty.all(StadiumBorder())))
               .wh(150, 60)
         ],
@@ -44,16 +59,27 @@ class homeDetails extends StatelessWidget {
                 arcType: VxArcType.CONVEY,
                 edge: VxEdge.TOP,
                 child: Container(
-                  color: Colors.white,
+                  color: context.cardColor,
                   width: context.screenWidth,
                   child: Column(
                     children: [
-                      catalog.name.text.xl4.bold.make(),
+                      catalog.name.text
+                          .color(context.theme.buttonColor)
+                          .xl4
+                          .bold
+                          .make(),
                       catalog.desc.text
                           .textStyle(context.captionStyle)
                           .xl
+                          .color(context.theme.buttonColor)
                           .make(),
                       15.heightBox,
+                      "Labore sit sea et amet ipsum stet ipsum dolore. ,  sed ipsum lorem clita ipsum,   clita dolore ut kasd ipsum invidunt et lorem et aliquyam. Ipsum vero et ipsum gubergren, gubergren nonumy aliquyam takimata gubergren dolor sit rebum eirmod, dolor magna et tempor dolor est ipsum ipsum elitr sanctus.."
+                          .text
+                          .textStyle(context.captionStyle)
+                          .color(context.theme.accentColor)
+                          .make()
+                          .p(16),
                     ],
                   ).py64(),
                 ),
