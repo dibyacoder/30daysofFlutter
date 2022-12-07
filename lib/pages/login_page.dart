@@ -51,6 +51,7 @@ class _login_pageState extends State<login_page> {
                     obscureText: false,
                     decoration: InputDecoration(
                         hintText: "Pintu", labelText: "Enter your name"),
+                    cursorColor: Colors.black,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "name can't be empty";
@@ -70,6 +71,7 @@ class _login_pageState extends State<login_page> {
                     decoration: InputDecoration(
                         hintText: "Pintu@123",
                         labelText: "Enter Your Password"),
+                    cursorColor: Colors.black,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "crush name can't be empty";
