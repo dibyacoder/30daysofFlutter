@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:myfirst_project/models/cart.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:myfirst_project/models/cart.dart';
 import '../widget/themes.dart';
 
 class mycart extends StatelessWidget {
@@ -25,6 +27,7 @@ class mycart extends StatelessWidget {
 }
 
 class _CartTotal extends StatelessWidget {
+  final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -32,10 +35,17 @@ class _CartTotal extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          "\$9999".text.xl5.color(context.theme.accentColor).make(),
+          "\$${_cart.totalPrice}"
+              .text
+              .xl5
+              .color(context.theme.accentColor)
+              .make(),
           30.widthBox,
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: "Buying is not supported yet".text.make()));
+            },
             style: ButtonStyle(
                 backgroundColor:
                     MaterialStateProperty.all(context.theme.buttonColor)),
@@ -53,18 +63,25 @@ class _CartList extends StatefulWidget {
 }
 
 class __CartListState extends State<_CartList> {
+  final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 5,
+      itemCount: _cart.items?.length,
       itemBuilder: (context, index) => ListTile(
-        leading: Icon(Icons.add, color: context.accentColor),
+        leading: IconButton(
+          icon: Icon(Icons.add, color: context.accentColor),
+          color: context.accentColor,
+          onPressed: () {},
+        ),
         trailing: IconButton(
           icon: Icon(Icons.remove_circle_outline),
           color: context.accentColor,
           onPressed: () {},
         ),
-        title: "Item 1".text.color(context.theme.accentColor).make(),
+        title: _cart.items[index].name.text
+            .color(context.theme.accentColor)
+            .makeCentered(),
       ),
     );
   }
