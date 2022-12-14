@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myfirst_project/models/cart.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:myfirst_project/models/cart.dart';
+import '../core/store.dart';
 import '../widget/themes.dart';
 
 class mycart extends StatelessWidget {
@@ -18,7 +19,10 @@ class mycart extends StatelessWidget {
       body: Column(
         children: [
           _CartList().p32().expand(),
-          Divider(),
+          Divider(
+            color: context.accentColor,
+            thickness: 5.0,
+          ),
           _CartTotal(),
         ],
       ),
@@ -27,9 +31,9 @@ class mycart extends StatelessWidget {
 }
 
 class _CartTotal extends StatelessWidget {
-  final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
+    final CartModel _cart = (VxState.store as MyStore).cart;
     return SizedBox(
       height: 200,
       child: Row(
@@ -57,32 +61,37 @@ class _CartTotal extends StatelessWidget {
   }
 }
 
-class _CartList extends StatefulWidget {
-  @override
-  __CartListState createState() => __CartListState();
-}
-
-class __CartListState extends State<_CartList> {
-  final _cart = CartModel();
+class _CartList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: _cart.items?.length,
-      itemBuilder: (context, index) => ListTile(
-        leading: IconButton(
-          icon: Icon(Icons.add, color: context.accentColor),
-          color: context.accentColor,
-          onPressed: () {},
-        ),
-        trailing: IconButton(
-          icon: Icon(Icons.remove_circle_outline),
-          color: context.accentColor,
-          onPressed: () {},
-        ),
-        title: _cart.items[index].name.text
+    final CartModel _cart = (VxState.store as MyStore).cart;
+    return _cart.items.isEmpty
+        ? "There's nothing in your cart"
+            .text
+            .xl3
             .color(context.theme.accentColor)
-            .makeCentered(),
-      ),
-    );
+            .makeCentered()
+        : ListView.builder(
+            itemCount: _cart.items?.length,
+            itemBuilder: (context, index) => ListTile(
+              leading: IconButton(
+                icon: Icon(Icons.add, color: context.accentColor),
+                color: context.accentColor,
+                onPressed: () {
+                  _cart.add(_cart.items[index]);
+                },
+              ),
+              trailing: IconButton(
+                icon: Icon(Icons.remove_circle_outline),
+                color: context.accentColor,
+                onPressed: () {
+                  _cart.remove(_cart.items[index]);
+                },
+              ),
+              title: _cart.items[index].name.text
+                  .color(context.theme.accentColor)
+                  .makeCentered(),
+            ),
+          );
   }
 }
