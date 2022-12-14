@@ -39,11 +39,17 @@ class _CartTotal extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          "\$${_cart.totalPrice}"
-              .text
-              .xl5
-              .color(context.theme.accentColor)
-              .make(),
+          VxConsumer(
+            mutations: {AddMutation, RemoveMutation},
+            notifications: {},
+            builder: (context, dynamic, VxStatus) {
+              return "\$${_cart.totalPrice}"
+                  .text
+                  .xl5
+                  .color(context.theme.accentColor)
+                  .make();
+            },
+          ),
           30.widthBox,
           ElevatedButton(
             onPressed: () {
@@ -64,6 +70,8 @@ class _CartTotal extends StatelessWidget {
 class _CartList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    VxState.watch(context, on: [AddMutation]);
+    VxState.watch(context, on: [RemoveMutation]);
     final CartModel _cart = (VxState.store as MyStore).cart;
     return _cart.items.isEmpty
         ? "There's nothing in your cart"
@@ -78,14 +86,14 @@ class _CartList extends StatelessWidget {
                 icon: Icon(Icons.add, color: context.accentColor),
                 color: context.accentColor,
                 onPressed: () {
-                  _cart.add(_cart.items[index]);
+                  AddMutation(_cart.items[index]);
                 },
               ),
               trailing: IconButton(
                 icon: Icon(Icons.remove_circle_outline),
                 color: context.accentColor,
                 onPressed: () {
-                  _cart.remove(_cart.items[index]);
+                  RemoveMutation(_cart.items[index]);
                 },
               ),
               title: _cart.items[index].name.text
